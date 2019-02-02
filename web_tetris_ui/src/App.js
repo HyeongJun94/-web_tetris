@@ -15,8 +15,9 @@ class App extends Component {
 
   render() {
     let contents;
+
     if(this.state.username){
-      contents = <Lobby/>
+      contents = <Lobby username={this.state.username}/>
     }
     else{
       contents = <Login login = {this.enterLobby.bind(this)}/>
