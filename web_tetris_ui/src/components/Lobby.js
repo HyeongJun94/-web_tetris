@@ -5,12 +5,13 @@ import { Segment, Grid } from 'semantic-ui-react';
 
 import Chat from './Chat'
 import UserInfo from './UserInfo';
+import Rooms from './Rooms';
 
 //[MUST]chatmanager가 만들어지는 사이클 공부하기
 class Lobby extends React.Component{
     constructor(props){
         super(props);
-
+        
         this.state={
             currentUser : '',
             joined: [],
@@ -68,25 +69,30 @@ class Lobby extends React.Component{
             });
     }
 
+    // [MUST] userInfo가 렌더링 할떄마다 호출되어야 하나??
     render(){
         const {currentUser} = this.state;
         let chat;
         let userInfo;
+        let rooms;
         
         if(currentUser !== ''){
             const room = currentUser.rooms.find((room) => room.id === this.state.activeRoom);
             userInfo = <UserInfo username={this.props.username}/>
             if(room){
                 chat = <Chat user={currentUser} room={room} key={room.id}/>
+                rooms = <Rooms user={currentUser}
+                               joinable={this.state.joinable} />
             }
+
         }
 
         return(
- 
             <Segment>
                 <h1>Lobby</h1>
                 <Grid>
                     <Grid.Column width={10}>
+                        { rooms }
                     </Grid.Column>
                     <Grid.Column width={5}>
                         <Grid divided='vertically'>
