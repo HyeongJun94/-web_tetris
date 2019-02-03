@@ -5,7 +5,12 @@ import Login from './components/Login';
 import Lobby from './components/Lobby';
 
 class App extends Component {
-  state = {};
+  // state = {};
+
+  //나중에 지울 예정
+  state = {
+    username: 'admin'
+  };
 
   enterLobby(username){
     this.setState({

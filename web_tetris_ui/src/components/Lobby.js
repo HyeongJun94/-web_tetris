@@ -2,8 +2,11 @@ import React from 'react';
 import { TokenProvider, ChatManager } from '@pusher/chatkit';
 import 'semantic-ui-css/semantic.min.css';
 import { Segment, Grid } from 'semantic-ui-react';
-import Chat from './Chat'
 
+import Chat from './Chat'
+import UserInfo from './UserInfo';
+
+//[MUST]chatmanager가 만들어지는 사이클 공부하기
 class Lobby extends React.Component{
     constructor(props){
         super(props);
@@ -68,24 +71,32 @@ class Lobby extends React.Component{
     render(){
         const {currentUser} = this.state;
         let chat;
+        let userInfo;
         
         if(currentUser !== ''){
             const room = currentUser.rooms.find((room) => room.id === this.state.activeRoom);
+            userInfo = <UserInfo username={this.props.username}/>
             if(room){
                 chat = <Chat user={currentUser} room={room} key={room.id}/>
             }
         }
 
         return(
-            
+ 
             <Segment>
                 <h1>Lobby</h1>
-
                 <Grid>
-                    <Grid.Column width={4}>
+                    <Grid.Column width={10}>
                     </Grid.Column>
-                    <Grid.Column width={12}>
-                        { chat }
+                    <Grid.Column width={5}>
+                        <Grid divided='vertically'>
+                            <Grid.Row>
+                                <Grid.Column>{ userInfo }</Grid.Column>
+                            </Grid.Row>
+                            <Grid.Row>
+                                <Grid.Column>{ chat }</Grid.Column>
+                            </Grid.Row>
+                        </Grid>
                     </Grid.Column>
                 </Grid>
             </Segment>
