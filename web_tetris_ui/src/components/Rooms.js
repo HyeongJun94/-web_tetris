@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, List, Icon, Button } from 'semantic-ui-react';
 import { Route, Redirect} from 'react-router-dom';
-import axios from 'axios';
 import Game from './Game'
 
 // rooms = <Rooms user={currentUser}joinable={this.state.joinable} />
@@ -14,7 +13,6 @@ class Rooms extends React.Component{
             redirect : false,
             path : ""
         }
-
         this.handleCreateRooms = this.handleCreateRooms.bind(this)
         this.handleEnterRooms = this.handleEnterRooms.bind(this)
         this.handleLeaveRoom = this.handleLeaveRoom.bind(this)
@@ -33,29 +31,9 @@ class Rooms extends React.Component{
         .catch(err => {
            console.log(`Error creating room ${err}`)
         })
-
     }
 
     handleEnterRooms(roomId){
-        // axios.request({
-        //     url: `http://localhost:4000/rooms/${roomId}`,
-        //     method: 'POST',
-        //     data: {
-        //         username : username,
-        //         roomId: roomId
-        //     }
-        // }).then((response) => {
-        //     //게임에 필요한 정보들을 받고 다른 component에 보낼 준비
-        //     this.setState({
-        //         redirect : true,
-        //         path : `/rooms/${roomId}`
-        //     });
-
-        //     this.props._enterRoom(room.id)
-        //     // console.log(`redirect:${this.state.redirect} path:${this.state.path}`)
-        // }).catch(err=>{
-        //     console.log(`Error entering room ${err}`)
-        // })
         this.setState({
             path : `/rooms/${roomId}`,
             activeRoom : roomId
@@ -120,7 +98,6 @@ class Rooms extends React.Component{
                     { joinableRooms }
                 </List>
             </div>
-   
         )
     }
 

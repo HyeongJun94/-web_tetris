@@ -16,7 +16,9 @@ class Lobby extends React.Component{
         this.state={
             currentUser : '',
             joined: [],
-            joinable: []
+            joinable: [],
+            lobbyId : 0,
+            activeRoom : 0
         };
 
         this._enterRoom = this._enterRoom.bind(this)
